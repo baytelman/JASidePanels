@@ -287,7 +287,7 @@ static char ja_kvoContext;
     }
     container.layer.shadowPath = shadowPath.CGPath;	
     container.layer.shadowColor = [UIColor blackColor].CGColor;
-    container.layer.shadowRadius = 10.0f;
+    container.layer.shadowRadius = 6.0f;
     container.layer.shadowOpacity = 0.75f;
     container.clipsToBounds = NO;
 }
@@ -788,6 +788,13 @@ static char ja_kvoContext;
     [self _adjustCenterFrame];
     
     if (animated) {
+        [UIView animateWithDuration:0.2  delay:0
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             self.leftPanelContainer.transform = CGAffineTransformIdentity;
+                             self.leftPanelContainer.alpha = 1;
+                         } completion:NULL];
+        
         [self _animateCenterPanel:shouldBounce completion:nil];
     } else {
         self.centerPanelContainer.frame = _centerPanelRestingFrame;	
@@ -831,6 +838,16 @@ static char ja_kvoContext;
     [self _adjustCenterFrame];
     
     if (animated) {
+        
+        [UIView animateWithDuration:0.4  delay:0
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             self.leftPanelContainer.transform = CGAffineTransformMakeScale(0.9, 0.9);
+                             self.leftPanelContainer.alpha = 0.6;
+                         } completion:NULL];
+        
+
+
         [self _animateCenterPanel:shouldBounce completion:^(__unused BOOL finished) {
             self.leftPanelContainer.hidden = YES;
             self.rightPanelContainer.hidden = YES;
